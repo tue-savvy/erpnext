@@ -16,9 +16,9 @@
   "first_name",
   "middle_name",
   "last_name",
-  "salutation",
   "employee_name",
   "employment_type",
+  "employee_number",
   "image",
   "column_break1",
   "company",
@@ -26,12 +26,42 @@
   "gender",
   "date_of_birth",
   "date_of_joining",
-  "employee_number",
+  "date_of_labour_contract",
+  "contact_details",
+  "cell_number",
+  "personal_email",
+  "company_email",
+  "column_break4",
+  "permanent_address",
+  "current_address",
   "emergency_contact_details",
   "person_to_be_contacted",
   "relation",
   "column_break_19",
   "emergency_phone_number",
+  "emergency_address",
+  "job_profile",
+  "department",
+  "designation",
+  "reports_to",
+  "column_break_31",
+  "grade",
+  "branch",
+  "personal_details",
+  "identification_no",
+  "date_of_issue",
+  "place_of_issue",
+  "marital_status",
+  "column_break6",
+  "identification_image",
+  "identification_link",
+  "salary_information",
+  "salary_mode",
+  "payroll_cost_center",
+  "column_break_52",
+  "bank_name",
+  "bank_ac_no",
+  "personal_tax_code",
   "erpnext_user",
   "user_id",
   "create_user",
@@ -44,13 +74,6 @@
   "contract_end_date",
   "notice_number_of_days",
   "date_of_retirement",
-  "job_profile",
-  "department",
-  "designation",
-  "reports_to",
-  "column_break_31",
-  "grade",
-  "branch",
   "approvers_section",
   "expense_approver",
   "leave_approver",
@@ -61,39 +84,9 @@
   "column_break_44",
   "holiday_list",
   "default_shift",
-  "salary_information",
-  "salary_mode",
-  "payroll_cost_center",
-  "column_break_52",
-  "bank_name",
-  "bank_ac_no",
   "health_insurance_section",
   "health_insurance_provider",
   "health_insurance_no",
-  "contact_details",
-  "cell_number",
-  "prefered_email",
-  "personal_email",
-  "unsubscribed",
-  "permanent_accommodation_type",
-  "permanent_address",
-  "column_break4",
-  "prefered_contact_email",
-  "company_email",
-  "current_accommodation_type",
-  "current_address",
-  "sb53",
-  "bio",
-  "personal_details",
-  "passport_number",
-  "date_of_issue",
-  "valid_upto",
-  "place_of_issue",
-  "marital_status",
-  "blood_group",
-  "column_break6",
-  "family_background",
-  "health_details",
   "educational_qualification",
   "education",
   "previous_work_experience",
@@ -112,7 +105,21 @@
   "feedback",
   "lft",
   "rgt",
-  "old_parent"
+  "old_parent",
+  "delete_fields_section",
+  "prefered_email",
+  "unsubscribed",
+  "permanent_accommodation_type",
+  "current_accommodation_type",
+  "prefered_contact_email",
+  "health_details",
+  "family_background",
+  "sb53",
+  "bio",
+  "blood_group",
+  "passport_number",
+  "valid_upto",
+  "salutation"
  ],
  "fields": [
   {
@@ -142,6 +149,7 @@
   {
    "fieldname": "salutation",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Salutation",
    "oldfieldname": "salutation",
    "oldfieldtype": "Select",
@@ -377,7 +385,7 @@
    "fieldtype": "Link",
    "in_global_search": 1,
    "in_list_view": 1,
-   "label": "Designation",
+   "label": "Position",
    "oldfieldname": "designation",
    "oldfieldtype": "Link",
    "options": "Designation",
@@ -399,13 +407,13 @@
   {
    "fieldname": "grade",
    "fieldtype": "Link",
-   "label": "Grade",
+   "label": "Level",
    "options": "Employee Grade"
   },
   {
    "fieldname": "branch",
    "fieldtype": "Link",
-   "label": "Branch",
+   "label": "Team",
    "oldfieldname": "branch",
    "oldfieldtype": "Link",
    "options": "Branch"
@@ -429,6 +437,7 @@
    "width": "50%"
   },
   {
+   "default": "Bank",
    "fieldname": "salary_mode",
    "fieldtype": "Select",
    "label": "Salary Mode",
@@ -448,7 +457,7 @@
    "depends_on": "eval:doc.salary_mode == 'Bank'",
    "fieldname": "bank_ac_no",
    "fieldtype": "Data",
-   "label": "Bank A/C No.",
+   "label": "Bank Account Number",
    "oldfieldname": "bank_ac_no",
    "oldfieldtype": "Data"
   },
@@ -471,7 +480,6 @@
    "label": "Health Insurance No"
   },
   {
-   "collapsible": 1,
    "fieldname": "contact_details",
    "fieldtype": "Section Break",
    "label": "Contact Details"
@@ -483,14 +491,17 @@
    "options": "Phone"
   },
   {
+   "default": "Company Email",
    "fieldname": "prefered_contact_email",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Prefered Contact Email",
    "options": "\nCompany Email\nPersonal Email\nUser ID"
   },
   {
    "fieldname": "prefered_email",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Prefered Email",
    "options": "Email",
    "read_only": 1
@@ -514,6 +525,7 @@
    "default": "0",
    "fieldname": "unsubscribed",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Unsubscribed"
   },
   {
@@ -524,6 +536,7 @@
   {
    "fieldname": "permanent_accommodation_type",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Permanent Address Is",
    "options": "\nRented\nOwned"
   },
@@ -535,6 +548,7 @@
   {
    "fieldname": "current_accommodation_type",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Current Address Is",
    "options": "\nRented\nOwned"
   },
@@ -547,12 +561,14 @@
    "collapsible": 1,
    "fieldname": "sb53",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Personal Bio"
   },
   {
    "description": "Short biography for website and other publications.",
    "fieldname": "bio",
    "fieldtype": "Text Editor",
+   "hidden": 1,
    "label": "Bio / Cover Letter"
   },
   {
@@ -574,6 +590,7 @@
   {
    "fieldname": "valid_upto",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Valid Upto"
   },
   {
@@ -602,12 +619,14 @@
    "description": "Here you can maintain family details like name and occupation of parent, spouse and children",
    "fieldname": "family_background",
    "fieldtype": "Small Text",
+   "hidden": 1,
    "label": "Family Background"
   },
   {
    "description": "Here you can maintain height, weight, allergies, medical concerns etc",
    "fieldname": "health_details",
    "fieldtype": "Small Text",
+   "hidden": 1,
    "label": "Health Details"
   },
   {
@@ -794,6 +813,7 @@
    "options": "User"
   },
   {
+   "collapsible": 1,
    "fieldname": "approvers_section",
    "fieldtype": "Section Break",
    "label": "Approvers"
@@ -807,13 +827,48 @@
    "fieldtype": "Link",
    "label": "Shift Request Approver",
    "options": "User"
+  },
+  {
+   "fieldname": "delete_fields_section",
+   "fieldtype": "Section Break",
+   "label": "Delete Fields"
+  },
+  {
+   "fieldname": "emergency_address",
+   "fieldtype": "Data",
+   "label": "Emergency Address"
+  },
+  {
+   "fieldname": "identification_no",
+   "fieldtype": "Data",
+   "label": "Identification No"
+  },
+  {
+   "fieldname": "identification_image",
+   "fieldtype": "Attach",
+   "label": "Identification Image"
+  },
+  {
+   "fieldname": "identification_link",
+   "fieldtype": "Data",
+   "label": "Identification Link"
+  },
+  {
+   "fieldname": "date_of_labour_contract",
+   "fieldtype": "Date",
+   "label": "Date of Labour Contract"
+  },
+  {
+   "fieldname": "personal_tax_code",
+   "fieldtype": "Data",
+   "label": "Personal Tax Code"
   }
  ],
  "icon": "fa fa-user",
  "idx": 24,
  "image_field": "image",
  "links": [],
- "modified": "2021-06-17 11:31:37.730760",
+ "modified": "2021-08-14 00:15:43.492250",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee",
@@ -859,5 +914,6 @@
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "employee_name"
+ "title_field": "employee_name",
+ "track_changes": 1
 }
