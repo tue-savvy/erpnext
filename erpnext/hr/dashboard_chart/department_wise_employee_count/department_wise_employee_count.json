@@ -1,8 +1,9 @@
 {
  "chart_name": "Department Wise Employee Count",
  "chart_type": "Group By",
+ "color": "#4463F0",
  "creation": "2020-07-22 11:56:32.760730",
- "custom_options": "",
+ "custom_options": "{\n  \"colors\":[\"#4463F0\"]\n}",
  "docstatus": 0,
  "doctype": "Dashboard Chart",
  "document_type": "Employee",
@@ -13,9 +14,9 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "last_synced_on": "2020-07-22 14:27:40.574194",
- "modified": "2020-07-22 14:33:38.036794",
- "modified_by": "Administrator",
+ "last_synced_on": "2021-08-19 22:39:42.030574",
+ "modified": "2021-08-19 22:41:44.825754",
+ "modified_by": "tue.nguyen@savvycomsoftware.com",
  "module": "HR",
  "name": "Department Wise Employee Count",
  "number_of_groups": 0,
@@ -23,7 +24,7 @@
  "time_interval": "Yearly",
  "timeseries": 0,
  "timespan": "Last Year",
- "type": "Donut",
+ "type": "Bar",
  "use_report_chart": 0,
  "y_axis": []
 }

@@ -13,18 +13,25 @@
   "email_id",
   "phone_number",
   "country",
+  "date_receivingcv",
   "status",
+  "skill",
+  "link",
   "column_break_3",
   "job_title",
   "source",
   "source_name",
   "employee_referral",
+  "company_partner",
   "applicant_rating",
+  "interview_status",
+  "interview_result",
   "section_break_6",
   "notes",
   "cover_letter",
   "resume_attachment",
   "resume_link",
+  "resumelink_hideinformation",
   "section_break_16",
   "currency",
   "column_break_18",
@@ -53,7 +60,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Status",
+   "label": "CV Status",
    "options": "Open\nReplied\nRejected\nHold\nAccepted",
    "reqd": 1
   },
@@ -76,7 +83,7 @@
    "options": "Job Applicant Source"
   },
   {
-   "depends_on": "eval: doc.source==\"Employee Referral\" ",
+   "depends_on": "eval: doc.source!=\"Hire Resource\"",
    "fieldname": "source_name",
    "fieldtype": "Link",
    "label": "Source Name",
@@ -160,13 +167,53 @@
    "label": "Employee Referral",
    "options": "Employee Referral",
    "read_only": 1
+  },
+  {
+   "fieldname": "skill",
+   "fieldtype": "Link",
+   "label": "Skill",
+   "options": "Skill"
+  },
+  {
+   "depends_on": "eval: doc.source==\"Hire Resource\"",
+   "fieldname": "company_partner",
+   "fieldtype": "Link",
+   "label": "Company Partner",
+   "options": "Company Partner"
+  },
+  {
+   "fieldname": "link",
+   "fieldtype": "Link",
+   "label": "Level",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "interview_status",
+   "fieldtype": "Select",
+   "label": "Interview Status",
+   "options": "Pass\nFail\nPending"
+  },
+  {
+   "fieldname": "date_receivingcv",
+   "fieldtype": "Date",
+   "label": "Date of Receiving CV"
+  },
+  {
+   "fieldname": "interview_result",
+   "fieldtype": "Data",
+   "label": "Interview Result Link"
+  },
+  {
+   "fieldname": "resumelink_hideinformation",
+   "fieldtype": "Data",
+   "label": "Resume Link (Hide information)"
   }
  ],
  "icon": "fa fa-user",
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-03-24 15:51:11.117517",
+ "modified": "2021-08-29 10:29:54.008116",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Applicant",

@@ -15,11 +15,11 @@
  ],
  "charts": [
   {
-   "chart": "Attendance Count",
-   "width": "Full"
+   "chart": "Gender Diversity Ratio",
+   "width": "Half"
   },
   {
-   "chart": "Gender Diversity Ratio",
+   "chart": "Employment Contract Count",
    "width": "Half"
   },
   {
@@ -41,6 +41,10 @@
   {
    "chart": "Department Wise Openings",
    "width": "Half"
+  },
+  {
+   "chart": "Attendance Count",
+   "width": "Full"
   }
  ],
  "creation": "2020-07-22 11:56:33.015888",
@@ -50,8 +54,8 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2020-07-22 14:42:12.789249",
- "modified_by": "Administrator",
+ "modified": "2021-08-25 18:42:22.204832",
+ "modified_by": "tue.nguyen@savvycomsoftware.com",
  "module": "HR",
  "name": "Human Resource",
  "owner": "Administrator"
