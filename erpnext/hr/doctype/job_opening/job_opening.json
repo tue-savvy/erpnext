@@ -13,6 +13,7 @@
   "column_break_5",
   "designation",
   "department",
+  "quantity",
   "staffing_plan",
   "planned_vacancies",
   "section_break_6",
@@ -156,12 +157,17 @@
    "fieldname": "publish_salary_range",
    "fieldtype": "Check",
    "label": "Publish Salary Range"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity"
   }
  ],
  "icon": "fa fa-bookmark",
  "idx": 1,
  "links": [],
- "modified": "2020-09-18 11:23:29.488923",
+ "modified": "2021-08-30 11:41:14.908505",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Opening",

@@ -2,13 +2,14 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "naming_series",
  "creation": "2013-03-07 11:55:07",
  "doctype": "DocType",
  "document_type": "Setup",
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "code",
   "project_name",
   "status",
   "project_type",
@@ -21,6 +22,8 @@
   "expected_end_date",
   "priority",
   "department",
+  "project_manager",
+  "project_manager_name",
   "customer_details",
   "customer",
   "column_break_14",
@@ -449,8 +452,28 @@
    "no_copy": 1,
    "options": "PROJ-.####",
    "print_hide": 1,
-   "reqd": 1,
    "set_only_once": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "project_manager",
+   "fieldtype": "Link",
+   "label": "Project Manager",
+   "options": "Employee",
+   "search_index": 1
+  },
+  {
+   "fetch_from": "project_manager.employee_name",
+   "fieldname": "project_manager_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "PM Name"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Project Code",
+   "unique": 1
   }
  ],
  "icon": "fa fa-puzzle-piece",
@@ -458,7 +481,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "max_attachments": 4,
- "modified": "2021-04-28 16:36:11.654632",
+ "modified": "2021-08-30 10:05:11.602053",
  "modified_by": "Administrator",
  "module": "Projects",
  "name": "Project",

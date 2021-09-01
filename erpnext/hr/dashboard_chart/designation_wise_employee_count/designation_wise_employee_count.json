@@ -13,9 +13,9 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "last_synced_on": "2020-07-22 14:27:40.602783",
- "modified": "2020-07-22 14:31:49.665555",
- "modified_by": "Administrator",
+ "last_synced_on": "2021-08-29 10:46:31.063538",
+ "modified": "2021-08-29 10:46:48.773225",
+ "modified_by": "thuy.tran@savvycomsoftware.com",
  "module": "HR",
  "name": "Designation Wise Employee Count",
  "number_of_groups": 0,
@@ -23,7 +23,7 @@
  "time_interval": "Yearly",
  "timeseries": 0,
  "timespan": "Last Year",
- "type": "Donut",
+ "type": "Bar",
  "use_report_chart": 0,
  "y_axis": []
 }

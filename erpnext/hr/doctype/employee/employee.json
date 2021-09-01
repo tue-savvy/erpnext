@@ -17,8 +17,9 @@
   "middle_name",
   "last_name",
   "employee_name",
-  "employment_type",
   "employee_number",
+  "employment_type",
+  "created_jiratempo",
   "image",
   "column_break1",
   "company",
@@ -27,9 +28,11 @@
   "date_of_birth",
   "date_of_joining",
   "date_of_labour_contract",
+  "contract_end_date",
   "contact_details",
   "cell_number",
   "personal_email",
+  "prefered_contact_email",
   "company_email",
   "column_break4",
   "permanent_address",
@@ -71,7 +74,6 @@
   "scheduled_confirmation_date",
   "final_confirmation_date",
   "col_break_22",
-  "contract_end_date",
   "notice_number_of_days",
   "date_of_retirement",
   "approvers_section",
@@ -111,7 +113,6 @@
   "unsubscribed",
   "permanent_accommodation_type",
   "current_accommodation_type",
-  "prefered_contact_email",
   "health_details",
   "family_background",
   "sb53",
@@ -231,7 +232,7 @@
    "fieldname": "employment_type",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
-   "label": "Employment Type",
+   "label": "Employment Contract",
    "oldfieldname": "employment_type",
    "oldfieldtype": "Link",
    "options": "Employment Type"
@@ -494,7 +495,6 @@
    "default": "Company Email",
    "fieldname": "prefered_contact_email",
    "fieldtype": "Select",
-   "hidden": 1,
    "label": "Prefered Contact Email",
    "options": "\nCompany Email\nPersonal Email\nUser ID"
   },
@@ -856,19 +856,25 @@
   {
    "fieldname": "date_of_labour_contract",
    "fieldtype": "Date",
-   "label": "Date of Labour Contract"
+   "label": "Contract Start Date"
   },
   {
    "fieldname": "personal_tax_code",
    "fieldtype": "Data",
    "label": "Personal Tax Code"
+  },
+  {
+   "default": "0",
+   "fieldname": "created_jiratempo",
+   "fieldtype": "Check",
+   "label": "Created Jira/Tempo"
   }
  ],
  "icon": "fa fa-user",
  "idx": 24,
  "image_field": "image",
  "links": [],
- "modified": "2021-08-14 00:15:43.492250",
+ "modified": "2021-08-26 12:10:17.100358",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee",
