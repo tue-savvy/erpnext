@@ -13,6 +13,7 @@
    "card": "Total Applicants (Last month)"
   }
  ],
+ "chart_options": "",
  "charts": [
   {
    "chart": "Gender Diversity Ratio",
@@ -43,8 +44,12 @@
    "width": "Half"
   },
   {
-   "chart": "Attendance Count",
-   "width": "Full"
+   "chart": "Joined Employees",
+   "width": "Half"
+  },
+  {
+   "chart": "Left Employees",
+   "width": "Half"
   }
  ],
  "creation": "2020-07-22 11:56:33.015888",
@@ -54,7 +59,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2021-08-25 18:42:22.204832",
+ "modified": "2021-09-03 20:56:28.489922",
  "modified_by": "tue.nguyen@savvycomsoftware.com",
  "module": "HR",
  "name": "Human Resource",

@@ -13,19 +13,22 @@
   "email_id",
   "phone_number",
   "country",
-  "date_receivingcv",
+  "date_receiving_cv",
   "status",
   "skill",
-  "link",
+  "level",
   "column_break_3",
   "job_title",
   "source",
   "source_name",
   "employee_referral",
   "company_partner",
-  "applicant_rating",
+  "interview_result_section",
   "interview_status",
   "interview_result",
+  "column_break_17",
+  "interview_date",
+  "applicant_rating",
   "section_break_6",
   "notes",
   "cover_letter",
@@ -182,21 +185,11 @@
    "options": "Company Partner"
   },
   {
-   "fieldname": "link",
-   "fieldtype": "Link",
-   "label": "Level",
-   "options": "Employee Grade"
-  },
-  {
+   "default": "Pending",
    "fieldname": "interview_status",
    "fieldtype": "Select",
    "label": "Interview Status",
-   "options": "Pass\nFail\nPending"
-  },
-  {
-   "fieldname": "date_receivingcv",
-   "fieldtype": "Date",
-   "label": "Date of Receiving CV"
+   "options": "Pending\nPass\nFail"
   },
   {
    "fieldname": "interview_result",
@@ -207,13 +200,39 @@
    "fieldname": "resumelink_hideinformation",
    "fieldtype": "Data",
    "label": "Resume Link (Hide information)"
+  },
+  {
+   "fieldname": "level",
+   "fieldtype": "Link",
+   "label": "Level",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "interview_result_section",
+   "fieldtype": "Section Break",
+   "label": "Interview Result"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_receiving_cv",
+   "fieldtype": "Date",
+   "label": "Date of Receiving CV"
+  },
+  {
+   "fieldname": "interview_date",
+   "fieldtype": "Date",
+   "label": "Interview Date"
   }
  ],
  "icon": "fa fa-user",
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-08-29 10:29:54.008116",
+ "modified": "2021-09-03 17:10:22.077675",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Applicant",
@@ -236,5 +255,6 @@
  "sort_field": "modified",
  "sort_order": "ASC",
  "subject_field": "notes",
- "title_field": "applicant_name"
+ "title_field": "applicant_name",
+ "track_changes": 1
 }
