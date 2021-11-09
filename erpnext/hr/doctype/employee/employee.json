@@ -48,6 +48,7 @@
   "designation",
   "reports_to",
   "column_break_31",
+  "division",
   "grade",
   "branch",
   "personal_details",
@@ -367,7 +368,6 @@
    "oldfieldtype": "Date"
   },
   {
-   "collapsible": 1,
    "fieldname": "job_profile",
    "fieldtype": "Section Break",
    "label": "Department and Grade"
@@ -662,6 +662,7 @@
    "options": "Simple"
   },
   {
+   "columns": 8,
    "fieldname": "internal_work_history",
    "fieldtype": "Table",
    "label": "Internal Work History",
@@ -868,13 +869,19 @@
    "fieldname": "created_jiratempo",
    "fieldtype": "Check",
    "label": "Created Jira/Tempo"
+  },
+  {
+   "fieldname": "division",
+   "fieldtype": "Select",
+   "label": "Division",
+   "options": "\nDEV 1\nDEV 2"
   }
  ],
  "icon": "fa fa-user",
  "idx": 24,
  "image_field": "image",
  "links": [],
- "modified": "2021-08-26 12:10:17.100358",
+ "modified": "2021-10-22 17:52:52.016047",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee",

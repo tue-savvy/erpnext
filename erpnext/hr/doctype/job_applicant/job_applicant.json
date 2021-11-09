@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "HR-APP-.YYYY.-.#####",
+ "autoname": "format:{skill}{######}_{applicant_name}",
  "creation": "2013-01-29 19:25:37",
  "description": "Applicant for a Job",
  "doctype": "DocType",
@@ -14,32 +14,34 @@
   "phone_number",
   "country",
   "date_receiving_cv",
-  "status",
-  "skill",
-  "level",
   "column_break_3",
   "job_title",
   "source",
   "source_name",
   "employee_referral",
   "company_partner",
+  "status",
+  "skill",
+  "level",
+  "section_break_6",
+  "resume_attachment",
+  "resume_attachment_hide_information",
+  "resume_link",
+  "resumelink_hideinformation",
+  "cover_letter",
+  "column_break_19",
+  "notes",
+  "section_break_16",
+  "currency",
+  "column_break_18",
+  "lower_range",
+  "upper_range",
   "interview_result_section",
   "interview_status",
   "interview_result",
   "column_break_17",
   "interview_date",
-  "applicant_rating",
-  "section_break_6",
-  "notes",
-  "cover_letter",
-  "resume_attachment",
-  "resume_link",
-  "resumelink_hideinformation",
-  "section_break_16",
-  "currency",
-  "column_break_18",
-  "lower_range",
-  "upper_range"
+  "applicant_rating"
  ],
  "fields": [
   {
@@ -55,8 +57,7 @@
    "fieldname": "email_id",
    "fieldtype": "Data",
    "label": "Email Address",
-   "options": "Email",
-   "reqd": 1
+   "options": "Email"
   },
   {
    "fieldname": "status",
@@ -64,7 +65,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "CV Status",
-   "options": "Open\nReplied\nRejected\nHold\nAccepted",
+   "options": "Open\nReplied\nRejected\nClosed\nHold\nAccepted",
    "reqd": 1
   },
   {
@@ -99,6 +100,7 @@
   {
    "fieldname": "cover_letter",
    "fieldtype": "Text",
+   "hidden": 1,
    "label": "Cover Letter"
   },
   {
@@ -108,9 +110,8 @@
   },
   {
    "fieldname": "notes",
-   "fieldtype": "Data",
-   "label": "Notes",
-   "read_only": 1
+   "fieldtype": "Small Text",
+   "label": "Notes"
   },
   {
    "fieldname": "phone_number",
@@ -131,9 +132,10 @@
   },
   {
    "fieldname": "applicant_rating",
-   "fieldtype": "Rating",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Applicant Rating"
+   "label": "Applicant Rating",
+   "options": "\n1.1\n1.2\n1.3\n2.1\n2.2\n2.3\n3.1\n3.2\n3.3\n4.1\n4.2\n4.3\n5.1\n5.2\n5.3"
   },
   {
    "fieldname": "section_break_16",
@@ -175,7 +177,8 @@
    "fieldname": "skill",
    "fieldtype": "Link",
    "label": "Skill",
-   "options": "Skill"
+   "options": "Skill",
+   "reqd": 1
   },
   {
    "depends_on": "eval: doc.source==\"Hire Resource\"",
@@ -226,16 +229,26 @@
    "fieldname": "interview_date",
    "fieldtype": "Date",
    "label": "Interview Date"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "resume_attachment_hide_information",
+   "fieldtype": "Attach",
+   "label": "Resume Attachment (Hide Information)"
   }
  ],
  "icon": "fa fa-user",
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-03 17:10:22.077675",
+ "modified": "2021-10-22 17:54:02.582058",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Applicant",
+ "name_case": "UPPER CASE",
  "owner": "Administrator",
  "permissions": [
   {

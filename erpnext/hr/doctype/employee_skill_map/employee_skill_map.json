@@ -7,6 +7,7 @@
  "field_order": [
   "employee",
   "employee_name",
+  "employee_status",
   "column_break_3",
   "designation",
   "skills_section",
@@ -59,10 +60,17 @@
   {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.status",
+   "fieldname": "employee_status",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Status"
   }
  ],
  "links": [],
- "modified": "2019-12-16 11:31:09.916893",
+ "modified": "2021-09-12 00:21:52.890348",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee Skill Map",
