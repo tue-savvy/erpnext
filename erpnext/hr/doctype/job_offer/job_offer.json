@@ -10,12 +10,15 @@
   "job_applicant",
   "applicant_name",
   "applicant_email",
+  "division",
+  "skill",
   "column_break_3",
   "status",
   "response_date",
   "offer_date",
   "designation",
   "company",
+  "onboard_date",
   "section_break_4",
   "offer_terms",
   "section_break_14",
@@ -86,7 +89,6 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Company",
    "options": "Company",
    "print_hide": 1,
@@ -163,11 +165,34 @@
    "fieldname": "response_date",
    "fieldtype": "Date",
    "label": "Response Date"
+  },
+  {
+   "bold": 1,
+   "fieldname": "onboard_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Onboard Date",
+   "mandatory_depends_on": "eval:doc.status == \"Accepted\""
+  },
+  {
+   "description": "For DEV department only",
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Division",
+   "options": "Division"
+  },
+  {
+   "fetch_from": "job_applicant.skill",
+   "fieldname": "skill",
+   "fieldtype": "Read Only",
+   "label": "Skill"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2021-08-30 09:52:05.711630",
+ "modified": "2021-11-20 00:35:02.448995",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Offer",

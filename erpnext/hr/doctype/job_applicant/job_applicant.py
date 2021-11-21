@@ -21,11 +21,11 @@ class JobApplicant(Document):
 		if job_offer:
 			self.get("__onload").job_offer = job_offer[0].name
 
-	def autoname(self):
-		keys = filter(None, (self.applicant_name, self.email_id, self.job_title))
-		if not keys:
-			frappe.throw(_("Name or Email is mandatory"), frappe.NameError)
-		self.name = " - ".join(keys)
+	#def autoname(self):
+	#	keys = filter(None, (self.applicant_name, self.email_id, self.job_title))
+	#	if not keys:
+	#		frappe.throw(_("Name or Email is mandatory"), frappe.NameError)
+	#	self.name = " - ".join(keys)
 
 	def validate(self):
 		if self.email_id:

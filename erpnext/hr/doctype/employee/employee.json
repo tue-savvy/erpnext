@@ -19,7 +19,6 @@
   "employee_name",
   "employee_number",
   "employment_type",
-  "created_jiratempo",
   "image",
   "column_break1",
   "company",
@@ -48,6 +47,7 @@
   "designation",
   "reports_to",
   "column_break_31",
+  "division",
   "grade",
   "branch",
   "personal_details",
@@ -266,7 +266,8 @@
    "allow_in_quick_entry": 1,
    "fieldname": "emergency_contact_details",
    "fieldtype": "Section Break",
-   "label": "Emergency Contact"
+   "label": "Emergency Contact",
+   "permlevel": 2
   },
   {
    "bold": 1,
@@ -367,7 +368,6 @@
    "oldfieldtype": "Date"
   },
   {
-   "collapsible": 1,
    "fieldname": "job_profile",
    "fieldtype": "Section Break",
    "label": "Department and Grade"
@@ -483,7 +483,8 @@
   {
    "fieldname": "contact_details",
    "fieldtype": "Section Break",
-   "label": "Contact Details"
+   "label": "Contact Details",
+   "permlevel": 2
   },
   {
    "fieldname": "cell_number",
@@ -575,7 +576,8 @@
    "collapsible": 1,
    "fieldname": "personal_details",
    "fieldtype": "Section Break",
-   "label": "Personal Details"
+   "label": "Personal Details",
+   "permlevel": 2
   },
   {
    "fieldname": "passport_number",
@@ -662,6 +664,7 @@
    "options": "Simple"
   },
   {
+   "columns": 8,
    "fieldname": "internal_work_history",
    "fieldtype": "Table",
    "label": "Internal Work History",
@@ -864,17 +867,17 @@
    "label": "Personal Tax Code"
   },
   {
-   "default": "0",
-   "fieldname": "created_jiratempo",
-   "fieldtype": "Check",
-   "label": "Created Jira/Tempo"
+   "fieldname": "division",
+   "fieldtype": "Link",
+   "label": "Division",
+   "options": "Division"
   }
  ],
  "icon": "fa fa-user",
  "idx": 24,
  "image_field": "image",
  "links": [],
- "modified": "2021-08-26 12:10:17.100358",
+ "modified": "2021-11-20 01:21:05.947583",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee",
