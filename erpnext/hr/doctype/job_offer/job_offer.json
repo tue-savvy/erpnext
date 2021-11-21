@@ -178,10 +178,10 @@
   {
    "description": "For DEV department only",
    "fieldname": "division",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Division",
-   "options": "\nDEV 1\nDEV 2"
+   "options": "Division"
   },
   {
    "fetch_from": "job_applicant.skill",
@@ -192,7 +192,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2021-11-02 09:49:11.379311",
+ "modified": "2021-11-20 00:35:02.448995",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Offer",

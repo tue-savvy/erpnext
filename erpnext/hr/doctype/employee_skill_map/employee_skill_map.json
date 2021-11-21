@@ -64,13 +64,15 @@
   {
    "fetch_from": "employee.status",
    "fieldname": "employee_status",
-   "fieldtype": "Read Only",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Status"
+   "label": "Status",
+   "options": "Active\nLeft",
+   "read_only": 1
   }
  ],
  "links": [],
- "modified": "2021-09-12 00:21:52.890348",
+ "modified": "2021-11-20 00:10:34.334846",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Employee Skill Map",
