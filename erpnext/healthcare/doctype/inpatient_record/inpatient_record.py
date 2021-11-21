@@ -3,11 +3,15 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
-import frappe, json
+
+import json
+
+import frappe
 from frappe import _
-from frappe.utils import today, now_datetime, getdate, get_datetime, get_link_to_form
-from frappe.model.document import Document
 from frappe.desk.reportview import get_match_cond
+from frappe.model.document import Document
+from frappe.utils import get_datetime, get_link_to_form, getdate, now_datetime, today
+
 
 class InpatientRecord(Document):
 	def after_insert(self):
@@ -58,7 +62,9 @@ class InpatientRecord(Document):
 		admit_patient(self, service_unit, check_in, expected_discharge)
 
 	@frappe.whitelist()
-	def discharge(self, check_out=now_datetime()):
+	def discharge(self, check_out=None):
+		if not check_out:
+			check_out = now_datetime()
 		if (getdate(check_out) < getdate(self.admitted_datetime)):
 			frappe.throw(_('Discharge date cannot be less than Admission date'))
 		discharge_patient(self, check_out)

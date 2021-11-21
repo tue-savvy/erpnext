@@ -3,24 +3,39 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
+
+import base64
+import io
+import json
 import os
 import re
-import jwt
 import sys
-import json
-import base64
-import frappe
-import six
 import traceback
-import io
+
+import frappe
+import jwt
+import six
 from frappe import _, bold
-from pyqrcode import create as qrcreate
-from frappe.utils.background_jobs import enqueue
-from frappe.utils.scheduler import is_scheduler_inactive
 from frappe.core.page.background_jobs.background_jobs import get_info
-from frappe.integrations.utils import make_post_request, make_get_request
+from frappe.integrations.utils import make_get_request, make_post_request
+from frappe.utils.background_jobs import enqueue
+from frappe.utils.data import (
+	add_to_date,
+	cint,
+	cstr,
+	flt,
+	format_date,
+	get_link_to_form,
+	getdate,
+	now_datetime,
+	time_diff_in_hours,
+	time_diff_in_seconds,
+)
+from frappe.utils.scheduler import is_scheduler_inactive
+from pyqrcode import create as qrcreate
+
 from erpnext.regional.india.utils import get_gst_accounts, get_place_of_supply
-from frappe.utils.data import cstr, cint, format_date, flt, time_diff_in_seconds, now_datetime, add_to_date, get_link_to_form, getdate, time_diff_in_hours
+
 
 @frappe.whitelist()
 def validate_eligibility(doc):
@@ -123,8 +138,8 @@ def get_doc_details(invoice):
 		invoice_date=invoice_date
 	))
 
-def validate_address_fields(address, is_shipping_address):
-	if ((not address.gstin and not is_shipping_address)
+def validate_address_fields(address, skip_gstin_validation):
+	if ((not address.gstin and not skip_gstin_validation)
 		or not address.city
 		or not address.pincode
 		or not address.address_title
@@ -136,10 +151,10 @@ def validate_address_fields(address, is_shipping_address):
 			title=_('Missing Address Fields')
 		)
 
-def get_party_details(address_name, is_shipping_address=False):
+def get_party_details(address_name, skip_gstin_validation=False):
 	addr = frappe.get_doc('Address', address_name)
 
-	validate_address_fields(addr, is_shipping_address)
+	validate_address_fields(addr, skip_gstin_validation)
 
 	if addr.gst_state_number == 97:
 		# according to einvoice standard
@@ -428,7 +443,11 @@ def make_einvoice(invoice):
 		if invoice.gst_category == 'Overseas':
 			shipping_details = get_overseas_address_details(invoice.shipping_address_name)
 		else:
-			shipping_details = get_party_details(invoice.shipping_address_name, is_shipping_address=True)
+			shipping_details = get_party_details(invoice.shipping_address_name, skip_gstin_validation=True)
+
+	dispatch_details = frappe._dict({})
+	if invoice.dispatch_address_name:
+		dispatch_details = get_party_details(invoice.dispatch_address_name, skip_gstin_validation=True)
 
 	if invoice.is_pos and invoice.base_paid_amount:
 		payment_details = get_payment_details(invoice)
@@ -440,7 +459,7 @@ def make_einvoice(invoice):
 		eway_bill_details = get_eway_bill_details(invoice)
 
 	# not yet implemented
-	dispatch_details = period_details = export_details = frappe._dict({})
+	period_details = export_details = frappe._dict({})
 
 	einvoice = schema.format(
 		transaction_details=transaction_details, doc_details=doc_details, dispatch_details=dispatch_details,
@@ -483,7 +502,7 @@ def log_error(data=None):
 		"Data:", data, seperator,
 		"Exception:", err_tb
 	])
-	frappe.log_error(title=_('E Invoice Request Failed'), message=message)
+	return frappe.log_error(title=_('E Invoice Request Failed'), message=message)
 
 def santize_einvoice_fields(einvoice):
 	int_fields = ["Pin","Distance","CrDay"]
@@ -912,7 +931,7 @@ class GSPConnector():
 
 		return errors
 
-	def raise_error(self, raise_exception=False, errors=[]):
+	def raise_error(self, raise_exception=False, errors=None):
 		title = _('E Invoice Request Failed')
 		if errors:
 			frappe.throw(errors, title=title, as_list=1)
