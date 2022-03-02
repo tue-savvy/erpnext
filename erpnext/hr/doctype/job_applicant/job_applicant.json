@@ -296,10 +296,11 @@
    "write": 1
   }
  ],
- "search_fields": "applicant_name",
+ "search_fields": "applicant_name, email_id, job_title, phone_number",
  "sender_field": "email_id",
  "sort_field": "modified",
  "sort_order": "ASC",
+ "states": [],
  "subject_field": "notes",
  "title_field": "applicant_name",
  "track_changes": 1

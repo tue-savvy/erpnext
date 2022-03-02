@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2020, Frappe Technologies Pvt. Ltd. and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 
 import json
 
@@ -87,11 +85,19 @@ class POSInvoiceMergeLog(Document):
 		sales_invoice.set_posting_time = 1
 		sales_invoice.posting_date = getdate(self.posting_date)
 		sales_invoice.save()
+		self.write_off_fractional_amount(sales_invoice, data)
 		sales_invoice.submit()
 
 		self.consolidated_invoice = sales_invoice.name
 
 		return sales_invoice.name
+
+	def write_off_fractional_amount(self, invoice, data):
+		pos_invoice_grand_total = sum(d.grand_total for d in data)
+
+		if abs(pos_invoice_grand_total - invoice.grand_total) < 1:
+			invoice.write_off_amount += -1 * (pos_invoice_grand_total - invoice.grand_total)
+			invoice.save()
 
 	def process_merging_into_credit_note(self, data):
 		credit_note = self.get_new_sales_invoice()
@@ -105,6 +111,7 @@ class POSInvoiceMergeLog(Document):
 		# TODO: return could be against multiple sales invoice which could also have been consolidated?
 		# credit_note.return_against = self.consolidated_invoice
 		credit_note.save()
+		self.write_off_fractional_amount(credit_note, data)
 		credit_note.submit()
 
 		self.consolidated_credit_note = credit_note.name
@@ -113,9 +120,15 @@ class POSInvoiceMergeLog(Document):
 
 	def merge_pos_invoice_into(self, invoice, data):
 		items, payments, taxes = [], [], []
+
 		loyalty_amount_sum, loyalty_points_sum = 0, 0
+
 		rounding_adjustment, base_rounding_adjustment = 0, 0
 		rounded_total, base_rounded_total = 0, 0
+
+		loyalty_amount_sum, loyalty_points_sum, idx = 0, 0, 1
+
+
 		for doc in data:
 			map_doc(doc, invoice, table_map={ "doctype": invoice.doctype })
 
@@ -132,9 +145,15 @@ class POSInvoiceMergeLog(Document):
 						i.uom == item.uom and i.net_rate == item.net_rate and i.warehouse == item.warehouse):
 						found = True
 						i.qty = i.qty + item.qty
+						i.amount = i.amount + item.net_amount
+						i.net_amount = i.amount
+						i.base_amount = i.base_amount + item.base_net_amount
+						i.base_net_amount = i.base_amount
 
 				if not found:
 					item.rate = item.net_rate
+					item.amount = item.net_amount
+					item.base_amount = item.base_net_amount
 					item.price_list_rate = 0
 					si_item = map_child_doc(item, invoice, {"doctype": "Sales Invoice Item"})
 					items.append(si_item)
@@ -149,6 +168,8 @@ class POSInvoiceMergeLog(Document):
 						found = True
 				if not found:
 					tax.charge_type = 'Actual'
+					tax.idx = idx
+					idx += 1
 					tax.included_in_print_rate = 0
 					tax.tax_amount = tax.tax_amount_after_discount_amount
 					tax.base_tax_amount = tax.base_tax_amount_after_discount_amount
@@ -164,10 +185,11 @@ class POSInvoiceMergeLog(Document):
 						found = True
 				if not found:
 					payments.append(payment)
+
 			rounding_adjustment += doc.rounding_adjustment
 			rounded_total += doc.rounded_total
-			base_rounding_adjustment += doc.rounding_adjustment
-			base_rounded_total += doc.rounded_total
+			base_rounding_adjustment += doc.base_rounding_adjustment
+			base_rounded_total += doc.base_rounded_total
 
 
 		if loyalty_points_sum:
@@ -179,9 +201,9 @@ class POSInvoiceMergeLog(Document):
 		invoice.set('payments', payments)
 		invoice.set('taxes', taxes)
 		invoice.set('rounding_adjustment',rounding_adjustment)
-		invoice.set('rounding_adjustment',base_rounding_adjustment)
-		invoice.set('base_rounded_total',base_rounded_total)
+		invoice.set('base_rounding_adjustment',base_rounding_adjustment)
 		invoice.set('rounded_total',rounded_total)
+		invoice.set('base_rounded_total',base_rounded_total)
 		invoice.additional_discount_percentage = 0
 		invoice.discount_amount = 0.0
 		invoice.taxes_and_charges = None
