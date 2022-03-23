@@ -9,7 +9,6 @@
  "email_append_to": 1,
  "engine": "InnoDB",
  "field_order": [
-  "details_section",
   "applicant_name",
   "email_id",
   "phone_number",
@@ -17,23 +16,14 @@
   "date_receiving_cv",
   "column_break_3",
   "job_title",
-  "designation",
-  "status",
-  "source_and_rating_section",
   "source",
   "source_name",
   "employee_referral",
   "company_partner",
-  "interview_result_section",
-  "interview_status",
-  "interview_result",
-  "column_break_17",
-  "interview_date",
-  "column_break_13",
-  "applicant_rating",
   "status",
   "skill",
   "level",
+  "designation",
   "section_break_6",
   "resume_attachment",
   "resume_attachment_hide_information",
@@ -106,8 +96,7 @@
   },
   {
    "fieldname": "section_break_6",
-   "fieldtype": "Section Break",
-   "label": "Resume"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "cover_letter",
@@ -200,11 +189,10 @@
    "options": "Company Partner"
   },
   {
-   "default": "Pending",
    "fieldname": "interview_status",
    "fieldtype": "Select",
    "label": "Interview Status",
-   "options": "Pending\nPass\nFail"
+   "options": "\nPending\nPass\nFail"
   },
   {
    "fieldname": "interview_result",
@@ -241,23 +229,8 @@
    "fieldname": "interview_date",
    "fieldtype": "Date",
    "label": "Interview Date"
- },
- {
-   "fieldname": "details_section",
-   "fieldtype": "Section Break",
-   "label": "Details"
   },
   {
-   "fieldname": "source_and_rating_section",
-   "fieldtype": "Section Break",
-   "label": "Source and Rating"
-  },
-  {
-   "fieldname": "column_break_13",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fetch_from": "job_opening.designation",
    "fieldname": "designation",
    "fieldtype": "Link",
    "label": "Designation",
@@ -277,7 +250,7 @@
  "idx": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-22 17:54:02.582058",
+ "modified": "2021-11-29 15:11:16.123067",
  "modified_by": "Administrator",
  "module": "HR",
  "name": "Job Applicant",
