@@ -4,7 +4,6 @@
 # ERPNext - web based ERP (http://erpnext.com)
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 
 import json
 
@@ -58,14 +57,13 @@ class MaterialRequest(BuyingController):
 				if actual_so_qty and (flt(so_items[so_no][item]) + already_indented > actual_so_qty):
 					frappe.throw(_("Material Request of maximum {0} can be made for Item {1} against Sales Order {2}").format(actual_so_qty - already_indented, item, so_no))
 
-	# Validate
-	# ---------------------
 	def validate(self):
 		super(MaterialRequest, self).validate()
 
 		self.validate_schedule_date()
 		self.check_for_on_hold_or_closed_status('Sales Order', 'sales_order')
 		self.validate_uom_is_integer("uom", "qty")
+		self.validate_material_request_type()
 
 		if not self.status:
 			self.status = "Draft"
@@ -81,6 +79,15 @@ class MaterialRequest(BuyingController):
 		# self.validate_qty_against_so()
 		# NOTE: Since Item BOM and FG quantities are combined, using current data, it cannot be validated
 		# Though the creation of Material Request from a Production Plan can be rethought to fix this
+
+		self.reset_default_field_value("set_warehouse", "items", "warehouse")
+		self.reset_default_field_value("set_from_warehouse", "items", "from_warehouse")
+
+	def validate_material_request_type(self):
+		""" Validate fields in accordance with selected type """
+
+		if self.material_request_type != "Customer Provided":
+			self.customer = None
 
 	def set_title(self):
 		'''Set title as comma separated list of items'''
@@ -502,7 +509,8 @@ def make_stock_entry(source_name, target_doc=None):
 			"field_map": {
 				"name": "material_request_item",
 				"parent": "material_request",
-				"uom": "stock_uom"
+				"uom": "stock_uom",
+				"job_card_item": "job_card_item"
 			},
 			"postprocess": update_item,
 			"condition": lambda doc: doc.ordered_qty < doc.stock_qty
@@ -531,6 +539,7 @@ def raise_work_orders(material_request):
 					"stock_uom": d.stock_uom,
 					"expected_delivery_date": d.schedule_date,
 					"sales_order": d.sales_order,
+					"sales_order_item": d.get("sales_order_item"),
 					"bom_no": get_item_details(d.item_code).bom_no,
 					"material_request": mr.name,
 					"material_request_item": d.name,

@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 
 import json
 from datetime import datetime
@@ -106,7 +104,7 @@ class Membership(Document):
 		return invoice
 
 	def validate_membership_type_and_settings(self, plan, settings):
-		settings_link = get_link_to_form("Membership Type", self.membership_type)
+		settings_link = get_link_to_form("Non Profit Settings", "Non Profit Settings")
 
 		if not settings.membership_debit_account:
 			frappe.throw(_("You need to set <b>Debit Account</b> in {0}").format(settings_link))
@@ -412,7 +410,7 @@ def get_plan_from_razorpay_id(plan_id):
 def set_expired_status():
 	frappe.db.sql("""
 		UPDATE
-			`tabMembership` SET `status` = 'Expired'
+			`tabMembership` SET `membership_status` = 'Expired'
 		WHERE
-			`status` not in ('Cancelled') AND `to_date` < %s
+			`membership_status` not in ('Cancelled') AND `to_date` < %s
 		""", (nowdate()))

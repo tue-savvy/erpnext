@@ -7,7 +7,6 @@ Provide a report and downloadable CSV according to the German DATEV format.
 - CSV download functionality `download_datev_csv` that provides a CSV file with
 	all required columns. Used to import the data into the DATEV Software.
 """
-from __future__ import unicode_literals
 
 import json
 
@@ -346,8 +345,7 @@ def run_query(filters, extra_fields, extra_joins, extra_filters, as_dict=1):
 			/* against number or, if empty, party against number */
 			%(temporary_against_account_number)s as 'Gegenkonto (ohne BU-Schlüssel)',
 
-			/* disable automatic VAT deduction */
-			'40' as 'BU-Schlüssel',
+			'' as 'BU-Schlüssel',
 
 			gl.posting_date as 'Belegdatum',
 			gl.voucher_no as 'Belegfeld 1',

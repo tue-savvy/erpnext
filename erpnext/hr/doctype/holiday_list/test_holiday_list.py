@@ -1,8 +1,8 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
-from __future__ import unicode_literals
 
 import unittest
+from contextlib import contextmanager
 from datetime import timedelta
 
 import frappe
@@ -31,3 +31,24 @@ def make_holiday_list(name, from_date=getdate()-timedelta(days=10), to_date=getd
 		"holidays" : holiday_dates
 		}).insert()
 	return doc
+
+
+@contextmanager
+def set_holiday_list(holiday_list, company_name):
+	"""
+	Context manager for setting holiday list in tests
+	"""
+	try:
+		company = frappe.get_doc('Company', company_name)
+		previous_holiday_list = company.default_holiday_list
+
+		company.default_holiday_list = holiday_list
+		company.save()
+
+		yield
+
+	finally:
+		# restore holiday list setup
+		company = frappe.get_doc('Company', company_name)
+		company.default_holiday_list = previous_holiday_list
+		company.save()

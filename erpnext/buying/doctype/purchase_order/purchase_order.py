@@ -1,7 +1,6 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
-from __future__ import unicode_literals
 
 import json
 
@@ -73,6 +72,7 @@ class PurchaseOrder(BuyingController):
 		self.create_raw_materials_supplied("supplied_items")
 		self.set_received_qty_for_drop_ship_items()
 		validate_inter_company_party(self.doctype, self.supplier, self.company, self.inter_company_order_reference)
+		self.reset_default_field_value("set_warehouse", "items", "warehouse")
 
 	def validate_with_previous_doc(self):
 		super(PurchaseOrder, self).validate_with_previous_doc({
@@ -316,6 +316,16 @@ class PurchaseOrder(BuyingController):
 			'target_ref_field': 'stock_qty',
 			'source_field': 'stock_qty'
 		})
+		self.status_updater.append({
+			'source_dt': 'Purchase Order Item',
+			'target_dt': 'Packed Item',
+			'target_field': 'ordered_qty',
+			'target_parent_dt': 'Sales Order',
+			'target_parent_field': '',
+			'join_field': 'sales_order_packed_item',
+			'target_ref_field': 'qty',
+			'source_field': 'stock_qty'
+		})
 
 	def update_delivered_qty_in_sales_order(self):
 		"""Update delivered qty in Sales Order for drop ship"""
@@ -392,7 +402,6 @@ def close_or_unclose_purchase_orders(names, status):
 	frappe.local.message_log = []
 
 def set_missing_values(source, target):
-	target.ignore_pricing_rule = 1
 	target.run_method("set_missing_values")
 	target.run_method("calculate_taxes_and_totals")
 

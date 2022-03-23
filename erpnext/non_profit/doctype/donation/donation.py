@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2021, Frappe Technologies Pvt. Ltd. and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 
 import json
 
@@ -104,7 +102,7 @@ def capture_razorpay_donations(*args, **kwargs):
 		if not donor:
 			donor = create_donor(payment)
 
-		donation = create_donation(donor, payment)
+		donation = create_razorpay_donation(donor, payment)
 		donation.run_method('create_payment_entry')
 
 	except Exception as e:
@@ -116,7 +114,7 @@ def capture_razorpay_donations(*args, **kwargs):
 	return { 'status': 'Success' }
 
 
-def create_donation(donor, payment):
+def create_razorpay_donation(donor, payment):
 	if not frappe.db.exists('Mode of Payment', payment.method):
 		create_mode_of_payment(payment.method)
 
@@ -130,7 +128,7 @@ def create_donation(donor, payment):
 		'date': getdate(),
 		'amount': flt(payment.amount) / 100, # Convert to rupees from paise
 		'mode_of_payment': payment.method,
-		'razorpay_payment_id': payment.id
+		'payment_id': payment.id
 	}).insert(ignore_mandatory=True)
 
 	donation.submit()

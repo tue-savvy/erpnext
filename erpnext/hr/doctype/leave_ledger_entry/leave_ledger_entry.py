@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2019, Frappe Technologies Pvt. Ltd. and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
 
 import frappe
 from frappe import _
@@ -173,7 +171,7 @@ def expire_carried_forward_allocation(allocation):
 	''' Expires remaining leaves in the on carried forward allocation '''
 	from erpnext.hr.doctype.leave_application.leave_application import get_leaves_for_period
 	leaves_taken = get_leaves_for_period(allocation.employee, allocation.leave_type,
-		allocation.from_date, allocation.to_date, do_not_skip_expired_leaves=True)
+		allocation.from_date, allocation.to_date, skip_expired_leaves=False)
 	leaves = flt(allocation.leaves) + flt(leaves_taken)
 
 	# allow expired leaves entry to be created

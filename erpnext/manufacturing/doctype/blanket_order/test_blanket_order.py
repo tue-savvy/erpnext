@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2018, Frappe Technologies Pvt. Ltd. and Contributors
 # See license.txt
-from __future__ import unicode_literals
-
-import unittest
-
 import frappe
+from frappe.tests.utils import FrappeTestCase
 from frappe.utils import add_months, today
 
 from erpnext import get_company_currency
@@ -13,7 +9,7 @@ from erpnext import get_company_currency
 from .blanket_order import make_order
 
 
-class TestBlanketOrder(unittest.TestCase):
+class TestBlanketOrder(FrappeTestCase):
 	def setUp(self):
 		frappe.flags.args = frappe._dict()
 

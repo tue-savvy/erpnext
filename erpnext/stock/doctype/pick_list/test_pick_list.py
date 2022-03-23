@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2019, Frappe Technologies Pvt. Ltd. and Contributors
 # See license.txt
-from __future__ import unicode_literals
 
 import frappe
 from frappe import _dict
 
 test_dependencies = ['Item', 'Sales Invoice', 'Stock Entry', 'Batch']
+
+from frappe.tests.utils import FrappeTestCase
 
 from erpnext.stock.doctype.item.test_item import create_item
 from erpnext.stock.doctype.pick_list.pick_list import create_delivery_note
@@ -14,10 +14,9 @@ from erpnext.stock.doctype.purchase_receipt.test_purchase_receipt import make_pu
 from erpnext.stock.doctype.stock_reconciliation.stock_reconciliation import (
 	EmptyStockReconciliationItemsError,
 )
-from erpnext.tests.utils import ERPNextTestCase
 
 
-class TestPickList(ERPNextTestCase):
+class TestPickList(FrappeTestCase):
 
 	def test_pick_list_picks_warehouse_for_each_item(self):
 		try:

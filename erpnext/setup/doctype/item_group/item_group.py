@@ -1,7 +1,6 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 
-from __future__ import unicode_literals
 
 import copy
 
@@ -41,7 +40,6 @@ class ItemGroup(NestedSet, WebsiteGenerator):
 	def on_update(self):
 		NestedSet.on_update(self)
 		invalidate_cache_for(self)
-		self.validate_name_with_item()
 		self.validate_one_root()
 		self.delete_child_item_groups_key()
 
@@ -64,10 +62,6 @@ class ItemGroup(NestedSet, WebsiteGenerator):
 		NestedSet.on_trash(self)
 		WebsiteGenerator.on_trash(self)
 		self.delete_child_item_groups_key()
-
-	def validate_name_with_item(self):
-		if frappe.db.exists("Item", self.name):
-			frappe.throw(frappe._("An item exists with same name ({0}), please change the item group name or rename the item").format(self.name), frappe.NameError)
 
 	def get_context(self, context):
 		context.show_search = True
@@ -118,7 +112,7 @@ class ItemGroup(NestedSet, WebsiteGenerator):
 		from erpnext.stock.doctype.item.item import validate_item_default_company_links
 		validate_item_default_company_links(self.item_group_defaults)
 
-def get_child_groups_for_website(item_group_name, immediate=False):
+def get_child_groups_for_website(item_group_name, immediate=False, include_self=False):
 	"""Returns child item groups *excluding* passed group."""
 	item_group = frappe.get_cached_value("Item Group", item_group_name, ["lft", "rgt"], as_dict=1)
 	filters = {
@@ -130,10 +124,17 @@ def get_child_groups_for_website(item_group_name, immediate=False):
 	if immediate:
 		filters["parent_item_group"] = item_group_name
 
+	if include_self:
+		filters.update({
+			"lft": [">=", item_group.lft],
+			"rgt": ["<=", item_group.rgt]
+		})
+
 	return frappe.get_all(
 		"Item Group",
 		filters=filters,
-		fields=["name", "route"]
+		fields=["name", "route"],
+		order_by="name"
 	)
 
 def get_child_item_groups(item_group_name):

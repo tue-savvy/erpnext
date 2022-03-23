@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2018, Frappe Technologies Pvt. Ltd. and Contributors
 # See license.txt
-from __future__ import unicode_literals
 
 import json
 
 import frappe
+from frappe.tests.utils import FrappeTestCase
 from frappe.utils import flt
 
 from erpnext.buying.doctype.purchase_order.purchase_order import (
@@ -20,10 +19,9 @@ from erpnext.stock.doctype.item.test_item import create_item
 from erpnext.stock.doctype.stock_reconciliation.test_stock_reconciliation import (
 	create_stock_reconciliation,
 )
-from erpnext.tests.utils import ERPNextTestCase
 
 
-class TestItemAlternative(ERPNextTestCase):
+class TestItemAlternative(FrappeTestCase):
 	def setUp(self):
 		super().setUp()
 		make_items()
