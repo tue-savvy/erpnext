@@ -1,4 +1,5 @@
 {
+ "cards_label": "",
  "category": "Modules",
  "charts": [
   {
@@ -469,6 +470,16 @@
    "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Staffing Plan",
+   "link_to": "Staffing Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Job Opening",
    "link_to": "Job Opening",
    "link_type": "DocType",
@@ -778,16 +789,6 @@
    "type": "Card Break"
   },
   {
-   "dependencies": "",
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Staffing Plan",
-   "link_to": "Staffing Plan",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
    "hidden": 0,
    "is_query_report": 0,
    "label": "Employee Referral",
@@ -863,7 +864,7 @@
    "type": "Link"
   }
  ],
- "modified": "2021-10-12 19:03:47.636340",
+ "modified": "2022-03-24 22:56:49.412874",
  "modified_by": "tue.nguyen@savvycomsoftware.com",
  "module": "HR",
  "name": "HR",
