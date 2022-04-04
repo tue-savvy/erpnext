@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:company_name",
+ "creation": "2021-08-26 16:59:04.292928",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company_name",
+  "website_profile",
+  "column_break_3",
+  "hired_positions",
+  "status",
+  "section_break_6",
+  "description",
+  "contact_person_section",
+  "contact_name",
+  "contact_phone",
+  "column_break_10",
+  "contact_email",
+  "contact_skype"
+ ],
+ "fields": [
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Company Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "website_profile",
+   "fieldtype": "Data",
+   "label": "Website/Profile"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hired_positions",
+   "fieldtype": "Data",
+   "label": "Hired Positions"
+  },
+  {
+   "default": "\u0110\u00e3 h\u1ee3p t\u00e1c",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "\u0110\u00e3 h\u1ee3p t\u00e1c\nCh\u01b0a h\u1ee3p t\u00e1c\nD\u1eebng h\u1ee3p t\u00e1c",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "contact_person_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "label": "Contact Name"
+  },
+  {
+   "fieldname": "contact_phone",
+   "fieldtype": "Data",
+   "label": "Contact Phone"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email"
+  },
+  {
+   "fieldname": "contact_skype",
+   "fieldtype": "Data",
+   "label": "Contact Skype"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-04 18:03:49.688022",
+ "modified_by": "Administrator",
+ "module": "HR",
+ "name": "Company Partner",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "company_name, website_profile",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "company_name",
+ "track_changes": 1
+}
